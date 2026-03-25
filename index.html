@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ino Studio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f9f7;
+      --fg: #111;
+      --muted: #888;
+      --accent: #2a2a2a;
+      --line: #e0e0de;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      background: var(--bg);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-color: var(--line); }
+
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--fg);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--fg); }
+
+    /* SECTIONS */
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .label {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+
+    .hero-title strong { font-weight: 600; }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 480px;
+    }
+
+    .since {
+      margin-top: 64px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* SERVICES */
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      margin-bottom: 56px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .service-item {
+      padding: 36px 0;
+      border-bottom: 1px solid var(--line);
+      padding-right: 40px;
+    }
+
+    .service-item h3 {
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .service-item p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* PROJECTS */
+    .projects-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .project-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+      gap: 24px;
+    }
+
+    .project-name {
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--muted);
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* CONTACT */
+    .contact-block {
+      margin-top: 8px;
+    }
+
+    .contact-block p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 420px;
+      margin-bottom: 40px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+    }
+
+    .contact-row span { color: var(--muted); font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+    .contact-row a {
+      color: var(--fg);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-row a:hover { color: var(--muted); }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px 48px;
+      font-size: 13px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 20px 24px; }
+      #hero, section { padding: 100px 24px 60px; }
+      .project-item { flex-direction: column; gap: 4px; }
+      .project-desc { text-align: left; }
+      footer { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a class="nav-logo" href="#hero">Ino Studio</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div id="hero">
+    <p class="label">Software Development Studio</p>
+    <h1 class="hero-title">We build<br><strong>digital products</strong><br>that work.</h1>
+    <p class="hero-sub">Clean code. Thoughtful design. Software that solves real problems and stands the test of time.</p>
+    <p class="since">Est. 2011</p>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <p class="label">What we do</p>
+    <h2 class="section-title">Services</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <h3>Web Development</h3>
+        <p>Custom web applications built with modern technologies, focused on performance and reliability.</p>
+      </div>
+      <div class="service-item">
+        <h3>Mobile Apps</h3>
+        <p>Native and cross-platform mobile experiences for iOS and Android.</p>
+      </div>
+      <div class="service-item">
+        <h3>Backend &amp; APIs</h3>
+        <p>Scalable server architecture, REST and GraphQL APIs, cloud infrastructure.</p>
+      </div>
+      <div class="service-item">
+        <h3>Consulting</h3>
+        <p>Technical strategy, code reviews, and architecture guidance for your team.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="label">Our work</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-list">
+      <div class="project-item">
+        <span class="project-name">Project Alpha</span>
+        <span class="project-desc">SaaS platform / Web</span>
+      </div>
+      <div class="project-item">
+        <span class="project-name">Project Beta</span>
+        <span class="project-desc">E-commerce / Mobile</span>
+      </div>
+      <div class="project-item">
+        <span class="project-name">Project Gamma</span>
+        <span class="project-desc">Internal tool / Web + API</span>
+      </div>
+      <div class="project-item">
+        <span class="project-name">Project Delta</span>
+        <span class="project-desc">Data dashboard / Web</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="label">Get in touch</p>
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-block">
+      <p>Have a project in mind? We'd love to hear about it. Reach out and let's talk.</p>
+      <div class="contact-links">
+        <div class="contact-row">
+          <span>Email</span>
+          <a href="mailto:hello@inostudio.com">hello@inostudio.com</a>
+        </div>
+        <div class="contact-row">
+          <span>Location</span>
+          <a>Your City, Country</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Ino Studio. All rights reserved.
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+  </script>
+
+</body>
+</html>
