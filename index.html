@@ -47,28 +47,16 @@
     nav.scrolled { border-color: var(--line); }
 
     .nav-logo {
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
       text-decoration: none;
-      color: var(--fg);
       display: flex;
       align-items: center;
-      gap: 8px;
     }
 
-    .nav-logo::before {
-      content: '';
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      background: var(--purple);
-      border-radius: 50%;
-      flex-shrink: 0;
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
     }
-
-    .nav-logo .ino { color: var(--green); }
 
     .nav-links {
       display: flex;
@@ -406,7 +394,7 @@
 <body>
 
   <nav id="navbar">
-    <a class="nav-logo" href="#hero"><span class="ino">ino</span>studio</a>
+    <a class="nav-logo" href="#hero"><img src="logo.png" alt="Ino Studio" /></a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#about">About</a></li>
