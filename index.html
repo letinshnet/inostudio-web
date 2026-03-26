@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ino Studio</title>
+  <title>Ino Studio — Web Design & Development</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -13,10 +13,12 @@
       --muted: #888;
       --accent: #2a2a2a;
       --line: #e0e0de;
-      --yellow: #D6F456;
-      --yellow-light: #f0fac0;
-      --gray-dark: #989e90;
-      --gray-mid: #989e90;
+      --green: #7CC21D;
+      --green-light: #eef6d0;
+      --purple: #4B3A8F;
+      --purple-light: #ece8f5;
+      --gray-dark: #555;
+      --gray-mid: #888;
     }
 
     html { scroll-behavior: smooth; }
@@ -61,10 +63,12 @@
       display: inline-block;
       width: 10px;
       height: 10px;
-      background: var(--yellow);
+      background: var(--purple);
       border-radius: 50%;
       flex-shrink: 0;
     }
+
+    .nav-logo .ino { color: var(--green); }
 
     .nav-links {
       display: flex;
@@ -111,7 +115,7 @@
       display: inline-block;
       width: 24px;
       height: 2px;
-      background: var(--yellow);
+      background: var(--green);
       flex-shrink: 0;
     }
 
@@ -146,9 +150,9 @@
       left: 0; right: 0;
       bottom: 2px;
       height: 6px;
-      background: var(--yellow);
+      background: var(--green);
       z-index: -1;
-      opacity: 0.7;
+      opacity: 0.5;
     }
 
     .hero-sub {
@@ -162,6 +166,38 @@
       font-size: 13px;
       color: var(--muted);
       letter-spacing: 0.06em;
+    }
+
+    /* STATS */
+    .stats-row {
+      display: flex;
+      gap: 48px;
+      margin-top: 56px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-number {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+    }
+
+    .stat-number span {
+      color: var(--green);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     /* SERVICES */
@@ -183,10 +219,10 @@
       padding: 36px 0;
       border-bottom: 1px solid var(--line);
       padding-right: 40px;
-      transition: background 0.2s;
+      transition: background 0.2s, padding-left 0.2s;
     }
 
-    .service-item:hover { background: var(--yellow-light); padding-left: 12px; transition: padding 0.2s, background 0.2s; }
+    .service-item:hover { background: var(--green-light); padding-left: 12px; }
 
     .service-item h3 {
       font-size: 17px;
@@ -201,6 +237,43 @@
       line-height: 1.5;
     }
 
+    /* ABOUT / STATS SECTION */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .about-stat {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--line);
+      padding-right: 40px;
+    }
+
+    .about-stat:nth-child(odd) { border-right: 1px solid var(--line); }
+
+    .about-number {
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .about-number em {
+      font-style: normal;
+      color: var(--green);
+    }
+
+    .about-desc {
+      font-size: 14px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
     /* PROJECTS */
     .projects-list {
       border-top: 1px solid var(--line);
@@ -213,12 +286,12 @@
       padding: 28px 0;
       border-bottom: 1px solid var(--line);
       gap: 24px;
-      transition: padding 0.2s;
+      transition: padding-left 0.2s;
     }
 
     .project-item:hover { padding-left: 12px; }
-    .project-item:hover .project-name { color: var(--gray-dark); }
-    .project-item:hover .project-tag { background: var(--yellow); color: var(--fg); }
+    .project-item:hover .project-name { color: var(--purple); }
+    .project-item:hover .project-tag { background: var(--green); color: var(--fg); }
 
     .project-name {
       font-size: 20px;
@@ -278,18 +351,19 @@
 
     .contact-row span { color: var(--muted); font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; }
 
-    .contact-row a {
+    .contact-row a, .contact-row address {
       color: var(--fg);
       text-decoration: none;
       transition: color 0.2s;
       font-weight: 500;
+      font-style: normal;
     }
-    .contact-row a:hover { color: var(--gray-mid); }
+    .contact-row a:hover { color: var(--green); }
 
     .contact-cta {
       display: inline-block;
       margin-top: 40px;
-      background: var(--yellow);
+      background: var(--green);
       color: var(--fg);
       font-size: 14px;
       font-weight: 600;
@@ -299,7 +373,7 @@
       padding: 14px 32px;
       transition: background 0.2s, transform 0.15s;
     }
-    .contact-cta:hover { background: var(--gray-dark); color: #fff; transform: translateY(-1px); }
+    .contact-cta:hover { background: var(--purple); color: #fff; transform: translateY(-1px); }
 
     /* FOOTER */
     footer {
@@ -310,9 +384,19 @@
       border-top: 1px solid var(--line);
     }
 
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--green); }
+
     @media (max-width: 600px) {
       nav { padding: 20px 24px; }
       #hero, section { padding: 100px 24px 60px; }
+      .stats-row { gap: 32px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-stat:nth-child(odd) { border-right: none; }
       .project-item { flex-direction: column; gap: 4px; }
       .project-desc { text-align: left; }
       footer { padding: 24px; }
@@ -322,20 +406,34 @@
 <body>
 
   <nav id="navbar">
-    <a class="nav-logo" href="#hero">Ino Studio</a>
+    <a class="nav-logo" href="#hero"><span class="ino">ino</span>studio</a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
-      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
   <div id="hero">
-    <p class="label">Software Development Studio</p>
-    <h1 class="hero-title">We build<br><strong>digital products</strong><br>that work.</h1>
-    <p class="hero-sub">Clean code. Thoughtful design. Software that solves real problems and stands the test of time.</p>
-    <p class="since">Est. 2011</p>
+    <p class="label">Web Design &amp; Development Studio</p>
+    <h1 class="hero-title">We create<br><strong>digital experiences</strong><br>that convert.</h1>
+    <p class="hero-sub">Professional web design, development, and CRM solutions — crafted with precision for businesses that want to grow.</p>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-number">140<span>+</span></div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">15<span>+</span></div>
+        <div class="stat-label">Years</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">250k<span>+</span></div>
+        <div class="stat-label">Lines of code</div>
+      </div>
+    </div>
+    <p class="since">Est. 2011 · Rīga, Latvia</p>
   </div>
 
   <!-- SERVICES -->
@@ -344,44 +442,44 @@
     <h2 class="section-title">Services</h2>
     <div class="services-grid">
       <div class="service-item">
+        <h3>Web Design &amp; UI/UX</h3>
+        <p>Visually compelling, user-centered interfaces designed to engage visitors and drive results.</p>
+      </div>
+      <div class="service-item">
         <h3>Web Development</h3>
-        <p>Custom web applications built with modern technologies, focused on performance and reliability.</p>
+        <p>Custom web applications and websites built with modern technologies, focused on performance and reliability.</p>
       </div>
       <div class="service-item">
-        <h3>Mobile Apps</h3>
-        <p>Native and cross-platform mobile experiences for iOS and Android.</p>
+        <h3>CRM Development</h3>
+        <p>Tailored CRM systems that streamline your workflows, automate processes, and centralize your business data.</p>
       </div>
       <div class="service-item">
-        <h3>Backend &amp; APIs</h3>
-        <p>Scalable server architecture, REST and GraphQL APIs, cloud infrastructure.</p>
-      </div>
-      <div class="service-item">
-        <h3>Consulting</h3>
-        <p>Technical strategy, code reviews, and architecture guidance for your team.</p>
+        <h3>Support &amp; Maintenance</h3>
+        <p>Ongoing technical support, updates, and optimization to keep your digital products running smoothly.</p>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <p class="label">Our work</p>
-    <h2 class="section-title">Projects</h2>
-    <div class="projects-list">
-      <div class="project-item">
-        <span class="project-name">Project Alpha</span>
-        <span class="project-desc"><span class="project-tag">Web</span> SaaS platform</span>
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="label">By the numbers</p>
+    <h2 class="section-title">15+ years of building the web</h2>
+    <div class="about-grid">
+      <div class="about-stat">
+        <div class="about-number">140<em>+</em></div>
+        <div class="about-desc">Completed projects</div>
       </div>
-      <div class="project-item">
-        <span class="project-name">Project Beta</span>
-        <span class="project-desc"><span class="project-tag">Mobile</span> E-commerce</span>
+      <div class="about-stat">
+        <div class="about-number">15<em>+</em></div>
+        <div class="about-desc">Years in the industry</div>
       </div>
-      <div class="project-item">
-        <span class="project-name">Project Gamma</span>
-        <span class="project-desc"><span class="project-tag">Web + API</span> Internal tool</span>
+      <div class="about-stat">
+        <div class="about-number">250k<em>+</em></div>
+        <div class="about-desc">Lines of code written</div>
       </div>
-      <div class="project-item">
-        <span class="project-name">Project Delta</span>
-        <span class="project-desc"><span class="project-tag">Web</span> Data dashboard</span>
+      <div class="about-stat">
+        <div class="about-number">10k<em>+</em></div>
+        <div class="about-desc">Cups of coffee</div>
       </div>
     </div>
   </section>
@@ -389,25 +487,29 @@
   <!-- CONTACT -->
   <section id="contact">
     <p class="label">Get in touch</p>
-    <h2 class="section-title">Contact</h2>
+    <h2 class="section-title">Let's work together</h2>
     <div class="contact-block">
-      <p>Have a project in mind? We'd love to hear about it. Reach out and let's talk.</p>
-      <a href="mailto:hello@inostudio.com" class="contact-cta">Start a project</a>
+      <p>Have a project in mind? We'd love to hear about it. Reach out and let's talk about how we can help.</p>
+      <a href="mailto:info@inostudio.lv" class="contact-cta">Start a project</a>
       <div class="contact-links">
         <div class="contact-row">
           <span>Email</span>
-          <a href="mailto:hello@inostudio.com">hello@inostudio.com</a>
+          <a href="mailto:info@inostudio.lv">info@inostudio.lv</a>
         </div>
         <div class="contact-row">
           <span>Location</span>
-          <a>Your City, Country</a>
+          <address>Talsu iela 22 — 1, Rīga, LV-1002</address>
+        </div>
+        <div class="contact-row">
+          <span>Company</span>
+          <address>SIA Ino Studio · Reg. No. 50103373261</address>
         </div>
       </div>
     </div>
   </section>
 
   <footer>
-    &copy; 2026 Ino Studio. All rights reserved.
+    &copy; 2026 <a href="#hero">Ino Studio</a>. All rights reserved. · Rīga, Latvia
   </footer>
 
   <script>
